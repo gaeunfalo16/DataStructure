@@ -1,0 +1,8 @@
+// function pointer
+#include <stdio.h>
+
+int main()
+{
+	printf("address of of main = %p\n", main);
+	return 0;
+}
