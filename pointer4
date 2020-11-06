@@ -1,0 +1,38 @@
+// function pointer2
+#include <stdio.h>
+
+void* larger(void* dataPtr1, void* dataPtr2, int (*ptrToCmpFun)(void*, void*))
+{
+	if ((*ptrToCmpFun) (dataPtr1, dataPtr2) > 0) // function pointer
+	{
+		return dataPtr1;
+	}
+	else
+	{
+		return dataPtr2;
+	}
+}
+
+int int_compare(void* ptr1, void* ptr2)
+{
+	if (*(int*)ptr1 >= *(int*)ptr2)
+	{
+		return 1;
+	}
+	else
+	{
+		return -1;
+	}
+}
+
+int main(void)
+{
+	int i = 7;
+	int j = 8;
+	int lrg = 0;
+
+	lrg = *(int*)larger(&i, &j, int_compare); // 주소값을 매개변수로 가진다.
+
+	printf("Larger value is: %d\n", lrg);
+	return 0;
+}
