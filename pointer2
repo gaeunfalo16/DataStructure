@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <malloc.h>
+
+typedef struct node
+{
+	void* dataPtr;
+	struct node* link;
+} NODE;
+
+NODE* createNode(void*);
+
+int main(void)
+{
+	int* newData = NULL;
+	int* nodeData = NULL;
+	NODE* node = NULL;
+
+	newData = (int*)malloc(sizeof(int));
+	*newData = 7;
+
+	node = createNode(newData);
+
+	nodeData = (int*)node->dataPtr; // *nodeData = *((int*)node->dataPtr)했더니 안됐다. node->dataPtr이 가리키는 건 주소값이 맞는 거 같다.
+	printf("Data from node: %d\n", *nodeData);
+	printf("Data address: %d\n", (int*)node->dataPtr);
+	return 0;
+}
+
+NODE* createNode(void* itemPtr)
+{
+	NODE* nodePtr = NULL;
+	nodePtr = (NODE*)malloc(sizeof(NODE)); // NODE 구조체를 여러 개 만들겠다. 그리고 nodePtr이 이걸 가리키겠다. 
+	nodePtr->dataPtr = itemPtr; // dataPtr이 가리키는 것과 itemPtr이 가리키는 건 똑같다. 하지만 주소는 다르다.
+	nodePtr->link = NULL;
+
+	return nodePtr;
+}
